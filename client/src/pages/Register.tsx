@@ -1,4 +1,7 @@
+
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Auth.css";
 
 function Register() {
   const [name, setName] = useState("");
@@ -7,7 +10,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  function handleSubmit(event: React.FormEvent) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -16,70 +19,80 @@ function Register() {
     }
 
     setError("");
-
-    console.log("Registration submitted:", {
-      name,
-      email,
-      password,
-    });
+    console.log("Registration form submitted:", { name, email });
   }
 
   return (
-    <div>
-      <h1>Register</h1>
+    <main className="auth-container">
+      <h1>Create Account</h1>
+      <p className="auth-description">Join the UNInet student community</p>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <div className="auth-field">
+          <label htmlFor="register-name">Full Name</label>
           <input
-            id="name"
+            id="register-name"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
+            placeholder="Enter your name"
+            autoComplete="name"
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="auth-field">
+          <label htmlFor="register-email">Email</label>
           <input
-            id="email"
+            id="register-email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            placeholder="you@example.com"
+            autoComplete="email"
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="auth-field">
+          <label htmlFor="register-password">Password</label>
           <input
-            id="password"
+            id="register-password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            required
+            placeholder="At least 6 characters"
+            autoComplete="new-password"
             minLength={6}
+            required
           />
         </div>
 
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        <div className="auth-field">
+          <label htmlFor="confirm-password">Confirm Password</label>
           <input
-            id="confirmPassword"
+            id="confirm-password"
             type="password"
             value={confirmPassword}
             onChange={(event) => setConfirmPassword(event.target.value)}
-            required
+            placeholder="Re-enter your password"
+            autoComplete="new-password"
             minLength={6}
+            required
           />
         </div>
 
-        {error && <p>{error}</p>}
+        {error && <p className="auth-error">{error}</p>}
 
-        <button type="submit">Register</button>
+        <button className="auth-button" type="submit">
+          Create Account
+        </button>
       </form>
-    </div>
+
+      <p className="auth-footer">
+        Already have an account? <Link to="/login">Log in</Link>
+      </p>
+    </main>
   );
 }
 

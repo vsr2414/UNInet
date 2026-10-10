@@ -1,48 +1,59 @@
+
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Auth.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(event: React.FormEvent) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log("Login submitted:", {
-      email,
-      password,
-    });
+    console.log("Login form submitted:", { email });
   }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <main className="auth-container">
+      <h1>Welcome Back</h1>
+      <p className="auth-description">Log in to your UNInet account</p>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <div className="auth-field">
+          <label htmlFor="login-email">Email</label>
           <input
-            id="email"
+            id="login-email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            placeholder="you@example.com"
+            autoComplete="email"
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="auth-field">
+          <label htmlFor="login-password">Password</label>
           <input
-            id="password"
+            id="login-password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            placeholder="Enter your password"
+            autoComplete="current-password"
             required
           />
         </div>
 
-        <button type="submit">Login</button>
+        <button className="auth-button" type="submit">
+          Log In
+        </button>
       </form>
-    </div>
+
+      <p className="auth-footer">
+        Don't have an account? <Link to="/register">Register</Link>
+      </p>
+    </main>
   );
 }
 
