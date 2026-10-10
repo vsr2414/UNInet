@@ -15,6 +15,13 @@ app.get("/", (_req, res) => {
   res.json({ message: "UNInet API is running!" });
 });
 
+app.get("/api/health", (_req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "UNInet API is healthy",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`UNInet server running on port ${PORT}`);
 });
