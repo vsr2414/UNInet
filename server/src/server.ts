@@ -18,6 +18,14 @@ app.get("/", (_req, res) => {
 
 app.use("/api/health", healthRoutes);
 
+// Handle requests to unknown routes
+app.use((_req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Route not found",
+  });
+});
+
 app.use(errorHandler);
 
 app.listen(PORT, () => {
