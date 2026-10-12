@@ -2,6 +2,7 @@ import healthRoutes from "./routes/healthRoutes.js";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import errorHandler from "./middleware/errorHandler.js";
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api/health", healthRoutes);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`UNInet server running on port ${PORT}`);
