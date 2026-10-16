@@ -6,6 +6,7 @@ import errorHandler from "./middleware/errorHandler.js";
 import requestLogger from "./middleware/requestLogger.js";
 import requestId from "./middleware/requestId.js";
 import notFoundHandler from "./middleware/notFoundHandler.js";
+import helmet from "helmet";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ const PORT = portValue === undefined ? 5000 : Number(portValue);
 if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {
   throw new Error("PORT must be an integer between 1 and 65535");
 }
+
+app.use(helmet());
 
 app.use(
   cors({
