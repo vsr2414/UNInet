@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import errorHandler from "./middleware/errorHandler.js";
 import requestLogger from "./middleware/requestLogger.js";
 import requestId from "./middleware/requestId.js";
+import notFoundHandler from "./middleware/notFoundHandler.js";
 
 dotenv.config();
 
@@ -32,12 +33,7 @@ app.get("/", (_req, res) => {
 app.use("/api/health", healthRoutes);
 
 // Handle requests to unknown routes
-app.use((_req, res) => {
-  res.status(404).json({
-    status: "error",
-    message: "Route not found",
-  });
-});
+app.use(notFoundHandler);
 
 app.use(errorHandler);
 
