@@ -16,7 +16,11 @@ if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {
   throw new Error("PORT must be an integer between 1 and 65535");
 }
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+  })
+);
 app.use(express.json());
 app.use(requestLogger);
 
