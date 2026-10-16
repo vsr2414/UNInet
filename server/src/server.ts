@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import errorHandler from "./middleware/errorHandler.js";
 import requestLogger from "./middleware/requestLogger.js";
+import requestId from "./middleware/requestId.js";
 
 dotenv.config();
 
