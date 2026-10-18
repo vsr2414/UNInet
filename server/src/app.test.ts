@@ -39,3 +39,17 @@ test("Oversized JSON requests return 413", async () => {
   assert.equal(response.body.status, "error");
   assert.equal(response.body.message, "Request body is too large");
 });
+
+
+test("GET /api returns API information", async () => {
+  const response = await request(app).get("/api");
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.name, "UNInet API");
+  assert.equal(response.body.version, "1.0.0");
+  assert.equal(
+    response.body.endpoints.health,
+    "/api/health"
+  );
+});
+
