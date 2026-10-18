@@ -61,3 +61,10 @@ test("GET / returns the API welcome message", async () => {
   assert.equal(response.body.message, "UNInet API is running!");
 });
 
+
+test("Responses include Helmet security headers", async () => {
+  const response = await request(app).get("/");
+
+  assert.ok(response.headers["x-content-type-options"]);
+  assert.ok(response.headers["x-frame-options"]);
+});
