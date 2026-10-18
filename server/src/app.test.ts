@@ -68,3 +68,15 @@ test("Responses include Helmet security headers", async () => {
   assert.ok(response.headers["x-content-type-options"]);
   assert.ok(response.headers["x-frame-options"]);
 });
+
+
+test("Invalid JSON requests return 400", async () => {
+  const response = await request(app)
+    .post("/")
+    .set("Content-Type", "application/json")
+    .send('{"invalid":');
+
+  assert.equal(response.status, 400);
+  assert.equal(response.body.status, "error");
+  assert.equal(response.body.message, "Invalid request body");
+});
