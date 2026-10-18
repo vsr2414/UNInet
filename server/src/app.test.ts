@@ -53,3 +53,11 @@ test("GET /api returns API information", async () => {
   );
 });
 
+
+test("GET / returns the API welcome message", async () => {
+  const response = await request(app).get("/");
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.message, "UNInet API is running!");
+});
+
