@@ -2,11 +2,31 @@
 import type { ErrorRequestHandler } from "express";
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-  console.error(err);
+  const statusCode =
+    typeof err.status === "number" &&
+    err.status >= 400 &&
+    err.status < 600
+      ? err.status
+      : typeof err.statusCode === "number" &&
+          err.statusCode >= 400 &&
+          err.statusCode < 600
+        ? err.statusCode
+        : 500;
 
-  res.status(500).json({
+  if (statusCode >= 500) {
+    console.error(err);
+  }
+
+  res.status(statusCode).json({
     status: "error",
-    message: "Internal server error",
+    message:
+      statusCode === 413
+        ? "Request body is too large"
+        : statusCode === 400
+          ? "Invalid request body"
+          : statusCode === 500
+            ? "Internal server error"
+            : "Request failed",
   });
 };
 

@@ -27,3 +27,15 @@ test("Unknown routes return a 404 response", async () => {
   assert.equal(response.body.status, "error");
   assert.match(response.body.message, /Route not found/);
 });
+
+
+test("Oversized JSON requests return 413", async () => {
+  const response = await request(app)
+    .post("/")
+    .set("Content-Type", "application/json")
+    .send({ data: "x".repeat(11 * 1024) });
+
+  assert.equal(response.status, 413);
+  assert.equal(response.body.status, "error");
+  assert.equal(response.body.message, "Request body is too large");
+});
