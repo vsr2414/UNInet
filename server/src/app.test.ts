@@ -80,3 +80,16 @@ test("Invalid JSON requests return 400", async () => {
   assert.equal(response.body.status, "error");
   assert.equal(response.body.message, "Invalid request body");
 });
+
+
+test("CORS allows the configured frontend origin", async () => {
+  const response = await request(app)
+    .get("/api/health")
+    .set("Origin", process.env.CLIENT_URL || "http://localhost:5173");
+
+  assert.equal(response.status, 200);
+  assert.equal(
+    response.headers["access-control-allow-origin"],
+    process.env.CLIENT_URL || "http://localhost:5173"
+  );
+});
