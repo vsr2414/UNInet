@@ -30,6 +30,19 @@ app.get("/", (_req, res) => {
   res.json({ message: "UNInet API is running!" });
 });
 
+
+app.get("/api", (_req, res) => {
+  res.status(200).json({
+    name: "UNInet API",
+    version: "1.0.0",
+    description: "University student questions and answers API",
+    endpoints: {
+      health: "/api/health",
+    },
+  });
+});
+
+
 app.use("/api/health", healthRoutes);
 
 app.use(notFoundHandler);
