@@ -1,0 +1,229 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
+
+const questions = [
+  {
+    id: 1,
+    title: "What are the best resources to learn Data Structures and Algorithms?",
+    description:
+      "I'm looking for beginner-friendly resources to improve my problem-solving skills.",
+    category: "Programming",
+    author: "Anonymous",
+    answers: 12,
+    time: "2 hours ago",
+    tags: ["DSA", "Learning", "Programming"],
+  },
+  {
+    id: 2,
+    title: "How do you manage university assignments and personal projects?",
+    description:
+      "I sometimes struggle to balance coursework with personal development. Any advice?",
+    category: "University Life",
+    author: "Anonymous",
+    answers: 8,
+    time: "5 hours ago",
+    tags: ["Productivity", "Student Life"],
+  },
+  {
+    id: 3,
+    title: "Which programming language should I learn for backend development?",
+    description:
+      "I already know some JavaScript and want to explore backend development.",
+    category: "Technology",
+    author: "Anonymous",
+    answers: 5,
+    time: "Yesterday",
+    tags: ["Backend", "JavaScript"],
+  },
+  {
+    id: 4,
+    title: "Are there any affordable places to study near campus?",
+    description:
+      "Looking for quiet and affordable places where students can study together.",
+    category: "Campus",
+    author: "Anonymous",
+    answers: 15,
+    time: "Yesterday",
+    tags: ["Campus", "Study"],
+  },
+];
+
+const categories = [
+  "All Questions",
+  "Programming",
+  "University Life",
+  "Technology",
+  "Campus",
+];
+
+function Home() {
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All Questions");
+
+  const filteredQuestions = questions.filter((question) => {
+    const matchesSearch =
+      question.title.toLowerCase().includes(search.toLowerCase()) ||
+      question.description.toLowerCase().includes(search.toLowerCase()) ||
+      question.tags.some((tag) =>
+        tag.toLowerCase().includes(search.toLowerCase())
+      );
+
+    const matchesCategory =
+      activeCategory === "All Questions" ||
+      question.category === activeCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  return (
+    <div className="home-page">
+      <header className="home-navbar">
+        <Link to="/" className="home-logo">
+          UNI<span>net</span>
+        </Link>
+
+        <nav className="home-nav-links">
+          <a href="#questions">Explore</a>
+          <a href="#topics">Topics</a>
+        </nav>
+
+        <div className="home-nav-actions">
+          <Link to="/login" className="home-login">
+            Log in
+          </Link>
+          <Link to="/register" className="home-register">
+            Join UNInet
+          </Link>
+        </div>
+      </header>
+
+      <main className="home-main">
+        <section className="home-hero">
+          <span className="home-eyebrow">YOUR UNIVERSITY COMMUNITY</span>
+
+          <h1>
+            Learn together.
+            <br />
+            <span>Grow together.</span>
+          </h1>
+
+          <p>
+            A place where university students ask questions, share knowledge,
+            and help each other succeed.
+          </p>
+
+          <div className="home-hero-actions">
+            <Link to="/register" className="home-primary-button">
+              Join the community
+            </Link>
+            <a href="#questions" className="home-secondary-button">
+              Explore questions
+            </a>
+          </div>
+        </section>
+
+        <section className="home-search-section">
+          <div className="home-search-box">
+            <span className="search-icon">⌕</span>
+            <input
+              type="search"
+              placeholder="Search questions, topics, or keywords..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              aria-label="Search questions"
+            />
+          </div>
+        </section>
+
+        <section className="home-content" id="questions">
+          <div className="home-section-heading">
+            <div>
+              <span className="home-section-label">COMMUNITY DISCUSSIONS</span>
+              <h2>Explore questions</h2>
+              <p>Discover what students are talking about.</p>
+            </div>
+
+            <Link to="/login" className="home-ask-button">
+              + Ask a question
+            </Link>
+          </div>
+
+          <div className="home-category-list" id="topics">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`home-category ${
+                  activeCategory === category ? "active" : ""
+                }`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <div className="home-question-list">
+            {filteredQuestions.length > 0 ? (
+              filteredQuestions.map((question) => (
+                <article className="home-question-card" key={question.id}>
+                  <div className="question-top">
+                    <span className="question-category">
+                      {question.category}
+                    </span>
+                    <span className="question-time">{question.time}</span>
+                  </div>
+
+                  <h3>{question.title}</h3>
+                  <p className="question-description">
+                    {question.description}
+                  </p>
+
+                  <div className="question-tags">
+                    {question.tags.map((tag) => (
+                      <span key={tag}>#{tag}</span>
+                    ))}
+                  </div>
+
+                  <div className="question-footer">
+                    <span className="question-author">
+                      <span className="author-avatar">U</span>
+                      {question.author}
+                    </span>
+
+                    <span className="question-answers">
+                      {question.answers} answers
+                    </span>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <div className="home-empty-state">
+                <h3>No questions found</h3>
+                <p>Try another search or choose a different category.</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="home-join-section">
+          <h2>Your knowledge can help someone.</h2>
+          <p>Join fellow students and become part of the conversation.</p>
+          <Link to="/register" className="home-primary-button">
+            Get started
+          </Link>
+        </section>
+      </main>
+
+      <footer className="home-footer">
+        <Link to="/" className="home-logo">
+          UNI<span>net</span>
+        </Link>
+        <p>Built for students, powered by community.</p>
+        <span>© 2026 UNInet</span>
+      </footer>
+    </div>
+  );
+}
+
+export default Home;

@@ -1,10 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
-function Home() {
-  return <h1>UNInet Home</h1>;
-}
 
 function App() {
   return (
