@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import Navbar from "../components/Navbar";
+import QuestionCard, { type Question } from "../components/QuestionCard";
 
-const questions = [
+const questions: Question[] = [
   {
     id: 1,
     title: "What are the best resources to learn Data Structures and Algorithms?",
@@ -108,7 +110,7 @@ function Home() {
 
         <section className="home-search-section">
           <div className="home-search-box">
-            <span className="search-icon">⌕</span>
+            <span className="search-icon">🔎</span>
             <input
               type="search"
               placeholder="Search questions, topics, or keywords..."
@@ -149,36 +151,7 @@ function Home() {
           <div className="home-question-list">
             {filteredQuestions.length > 0 ? (
               filteredQuestions.map((question) => (
-                <article className="home-question-card" key={question.id}>
-                  <div className="question-top">
-                    <span className="question-category">
-                      {question.category}
-                    </span>
-                    <span className="question-time">{question.time}</span>
-                  </div>
-
-                  <h3>{question.title}</h3>
-                  <p className="question-description">
-                    {question.description}
-                  </p>
-
-                  <div className="question-tags">
-                    {question.tags.map((tag) => (
-                      <span key={tag}>#{tag}</span>
-                    ))}
-                  </div>
-
-                  <div className="question-footer">
-                    <span className="question-author">
-                      <span className="author-avatar">U</span>
-                      {question.author}
-                    </span>
-
-                    <span className="question-answers">
-                      {question.answers} answers
-                    </span>
-                  </div>
-                </article>
+                <QuestionCard key={question.id} question={question} />
               ))
             ) : (
               <div className="home-empty-state">
