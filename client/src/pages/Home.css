@@ -1,3 +1,4 @@
+
 .home-page {
   min-height: 100vh;
   background: #f8f9fc;
@@ -5,50 +6,6 @@
   text-align: left;
 }
 
-.home-navbar {
-  height: 76px;
-  padding: 0 8%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #ffffff;
-  border-bottom: 1px solid #ececf2;
-}
-
-.home-logo {
-  color: #29234c;
-  font-size: 27px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  text-decoration: none;
-}
-
-.home-logo span {
-  color: #7957e8;
-}
-
-.home-nav-links,
-.home-nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.home-nav-links a,
-.home-login {
-  color: #66677b;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.home-nav-links a:hover,
-.home-login:hover {
-  color: #7957e8;
-}
-
-.home-register,
 .home-primary-button {
   display: inline-flex;
   align-items: center;
@@ -63,7 +20,6 @@
   transition: background 0.2s, transform 0.2s;
 }
 
-.home-register:hover,
 .home-primary-button:hover {
   background: #6340d1;
   transform: translateY(-2px);
@@ -385,22 +341,6 @@
 }
 
 @media (max-width: 650px) {
-  .home-navbar {
-    height: auto;
-    min-height: 70px;
-    padding: 15px 6%;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-
-  .home-nav-links {
-    display: none;
-  }
-
-  .home-nav-actions {
-    gap: 15px;
-  }
-
   .home-main {
     width: 90%;
   }

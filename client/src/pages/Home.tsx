@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import Navbar from "../components/Navbar";
 
 const questions = [
   {
@@ -78,25 +79,7 @@ function Home() {
 
   return (
     <div className="home-page">
-      <header className="home-navbar">
-        <Link to="/" className="home-logo">
-          UNI<span>net</span>
-        </Link>
-
-        <nav className="home-nav-links">
-          <a href="#questions">Explore</a>
-          <a href="#topics">Topics</a>
-        </nav>
-
-        <div className="home-nav-actions">
-          <Link to="/login" className="home-login">
-            Log in
-          </Link>
-          <Link to="/register" className="home-register">
-            Join UNInet
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="home-main">
         <section className="home-hero">
