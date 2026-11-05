@@ -61,3 +61,26 @@
   color: #7957e8;
   font-weight: 700;
 }
+
+.home-clear-filters {
+  margin-top: 16px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #7957e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.home-clear-filters:hover {
+  background: #6342ce;
+  transform: translateY(-2px);
+}
+
+.home-clear-filters:focus-visible {
+  outline: 3px solid rgba(121, 87, 232, 0.3);
+  outline-offset: 3px;
+}

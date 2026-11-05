@@ -187,10 +187,24 @@ function Home() {
                 />
               ))
             ) : (
-              <div className="home-empty-state">
-                <h3>No questions found</h3>
-                <p>Try another search or choose a different category.</p>
-              </div>
+          <div className="home-empty-state">
+          <h3>No questions found</h3>
+          <p>
+           We couldn't find any questions matching your search.
+           Try different keywords or clear your filters.
+           </p>
+
+  <button
+    className="home-clear-filters"
+    onClick={() => {
+      setSearch("");
+      setActiveCategory("All Questions");
+      setSortBy("latest");
+    }}
+  >
+    Clear all filters
+  </button>
+</div>
             )}
           </div>
         </section>
