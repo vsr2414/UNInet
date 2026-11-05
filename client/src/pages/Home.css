@@ -50,3 +50,14 @@
     justify-content: space-between;
   }
 }
+
+.home-results-count {
+  margin: 0 0 16px;
+  color: #77748a;
+  font-size: 14px;
+}
+
+.home-results-count strong {
+  color: #7957e8;
+  font-weight: 700;
+}

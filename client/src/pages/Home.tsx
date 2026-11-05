@@ -174,7 +174,10 @@ function Home() {
               <option value="answers">Most answers</option>
             </select>
           </div>
-
+         <div className="home-results-count">
+            Showing <strong>{filteredQuestions.length}</strong>{" "}
+            {filteredQuestions.length === 1 ? "question" : "questions"}
+          </div>
           <div className="home-question-list">
             {filteredQuestions.length > 0 ? (
               filteredQuestions.map((question) => (
