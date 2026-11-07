@@ -631,13 +631,3 @@
   }
 }
 
-/* Accessibility: reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-  .home-question-card,
-  .home-register,
-  .home-primary-button,
-  .home-clear-filters {
-    transition: none;
-  }
-}
